@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Utilities.Business;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -22,6 +23,11 @@ namespace Business.Concrete
 
         public IResult Add(Departman departman)
         {
+            IResult result = BusinessRules.Run(CheckIfTelephone(departman.Telephone));
+            if (result != null)
+            {
+                return result;
+            }
             _departmanDal.Add(departman);
             return new SuccessResult(Messages.DepartmanAdded);
         }
@@ -35,6 +41,15 @@ namespace Business.Concrete
         public IDataResult<List<Departman>> GetAll()
         {
             return new SuccessDataResult<List<Departman>>(_departmanDal.GetAll());
+        }
+        private IResult CheckIfTelephone(Int64 telephone)
+        {
+            var result = _departmanDal.GetAll(x => x.Telephone == telephone).Any();
+            if (result)
+            {
+                return new ErrorResult();
+            }
+            return new SuccessResult();
         }
     }
 }
