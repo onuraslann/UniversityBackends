@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Validation;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -20,6 +22,7 @@ namespace Business.Concrete
             _studentDal = studentDal;
         }
 
+        [ValidationAspect(typeof(StudentValidator))]
         public IResult Add(Student student)
         {
             _studentDal.Add(student);
