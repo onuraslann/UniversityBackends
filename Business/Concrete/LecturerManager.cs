@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Validation;
@@ -23,6 +24,7 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(LecturerValidator))]
+        [SecuredOperation("admin,editor")]
         public IResult Add(Lecturer lecturer)
         {
             _lecturerDal.Add(lecturer);

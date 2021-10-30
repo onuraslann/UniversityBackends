@@ -20,6 +20,7 @@ namespace Business.Concrete
             _noteDal = noteDal;
         }
 
+
         public IResult Add(Note note)
         {
             _noteDal.Add(note);

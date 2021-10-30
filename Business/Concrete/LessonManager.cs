@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Validation;
@@ -25,6 +26,7 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(LessonValidator))]
+        [SecuredOperation("admin,editor")]
         public IResult Add(Lesson lesson)
         {
             IResult result = BusinessRules.Run(CheckIfLessonNameExist(lesson.LessonName), CheckIfStudentId(lesson.StudentId));
