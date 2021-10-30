@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects;
 using Business.Constants;
 using Core.Utilities.Business;
 using Core.Utilities.Result;
@@ -20,7 +21,7 @@ namespace Business.Concrete
         {
             _departmanDal = departmanDal;
         }
-
+        [SecuredOperation("admin,editor")]
         public IResult Add(Departman departman)
         {
             IResult result = BusinessRules.Run(CheckIfTelephone(departman.Telephone));
