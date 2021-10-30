@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
-    public interface IAuthService
-    {
+   
+    
         public interface IAuthService
         {
             IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password);
@@ -19,5 +19,5 @@ namespace Business.Abstract
             IResult UserExists(string email);
             IDataResult<AccessToken> CreateAccessToken(User user);
         }
-    }
+    
 }
