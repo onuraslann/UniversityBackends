@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.BusinessAspects;
 using Business.Constants;
+using Core.Aspects.Caching;
 using Core.Utilities.Business;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
@@ -39,6 +40,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.DepartmanDeleted);
         }
 
+        [CacheAspect]
         public IDataResult<List<Departman>> GetAll()
         {
             return new SuccessDataResult<List<Departman>>(_departmanDal.GetAll());
