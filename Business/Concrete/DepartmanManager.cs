@@ -2,6 +2,7 @@
 using Business.BusinessAspects;
 using Business.Constants;
 using Core.Aspects.Caching;
+using Core.Aspects.Performance;
 using Core.Utilities.Business;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
@@ -41,6 +42,7 @@ namespace Business.Concrete
         }
 
         [CacheAspect]
+        [PerformanceAspect(interval: 0)]
         public IDataResult<List<Departman>> GetAll()
         {
             return new SuccessDataResult<List<Departman>>(_departmanDal.GetAll());

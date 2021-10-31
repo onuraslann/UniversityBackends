@@ -39,5 +39,25 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+        [HttpPut("update")]
+        public IActionResult Update(Student student)
+        {
+            var result = _studentService.Update(student);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpPost("transaction")]
+        public IActionResult TransactionTet(Student student)
+        {
+            var result = _studentService.TransactionOperation(student);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
     }
 }

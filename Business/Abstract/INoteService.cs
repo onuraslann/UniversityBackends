@@ -13,6 +13,7 @@ namespace Business.Abstract
         IDataResult<List<Note>> GetAll();
         IResult Add(Note note);
         IResult Update(Note note);
+       
           
     }
 }

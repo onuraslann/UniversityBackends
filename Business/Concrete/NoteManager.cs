@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Core.Aspects.Caching;
+using Core.Aspects.Performance;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -27,12 +28,14 @@ namespace Business.Concrete
             _noteDal.Add(note);
             return new SuccessResult(Messages.NoteAdded);
         }
-        [CacheAspect]
+        [CacheAspect(duration: 10)]
+        [PerformanceAspect(interval:5)]
         public IDataResult<List<Note>> GetAll()
         {
             return new SuccessDataResult<List<Note>>(_noteDal.GetAll());
         }
 
+        
         public IResult Update(Note note)
         {
             _noteDal.Update(note);

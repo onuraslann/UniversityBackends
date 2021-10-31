@@ -2,6 +2,7 @@
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Caching;
+using Core.Aspects.Transaction;
 using Core.Aspects.Validation;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
@@ -33,6 +34,21 @@ namespace Business.Concrete
         public IDataResult<List<Student>> GetAll()
         {
             return new SuccessDataResult<List<Student>>(_studentDal.GetAll());
+        }
+
+
+        [TransactionScopeAspect]
+        public IResult TransactionOperation(Student student)
+        {
+            _studentDal.Update(student);
+            //_studentDal.Add(student);
+            return new SuccessResult();
+        }
+
+        public IResult Update(Student student)
+        {
+            _studentDal.Update(student);
+            return new SuccessResult();
         }
     }
 }

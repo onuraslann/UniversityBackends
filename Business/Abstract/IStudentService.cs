@@ -12,5 +12,7 @@ namespace Business.Abstract
     {
         IDataResult<List<Student>> GetAll();
         IResult Add(Student student);
+        IResult Update(Student student);
+        IResult TransactionOperation(Student student);
     }
 }
